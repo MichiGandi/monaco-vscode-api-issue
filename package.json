@@ -21,6 +21,8 @@
     "@codingame/monaco-vscode-textmate-service-override": "^18.2.0",
     "@codingame/monaco-vscode-theme-defaults-default-extension": "^18.2.0",
     "@codingame/monaco-vscode-theme-service-override": "^18.2.0",
-    "monaco-editor": "npm:@codingame/monaco-vscode-editor-api@^18.2.0"
+    "monaco-editor": "npm:@codingame/monaco-vscode-editor-api@^18.2.0",
+    "monaco-languageclient": "^9.8.0",
+    "vscode-ws-jsonrpc": "^3.4.0"
   }
 }
