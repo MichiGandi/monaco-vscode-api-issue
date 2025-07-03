@@ -1,3 +1,4 @@
+import "vscode/localExtensionHost";
 import '@codingame/monaco-vscode-python-default-extension';
 import "@codingame/monaco-vscode-theme-defaults-default-extension";
 
@@ -6,7 +7,6 @@ import * as monaco from 'monaco-editor';
 import { initialize } from '@codingame/monaco-vscode-api'
 
 // we need to import this so monaco-languageclient can use vscode-api
-import "vscode/localExtensionHost";
 import { initWebSocketAndStartClient } from './lsp-client'
 
 // everything else is the same except the last line
