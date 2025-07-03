@@ -3,7 +3,7 @@ import './style.css'
 import * as monaco from 'monaco-editor';
 
 // importing installed services
-import { initialize } from 'vscode/services'
+import { initialize } from '@codingame/monaco-vscode-api'
 import getLanguagesServiceOverride from "@codingame/monaco-vscode-languages-service-override";
 import getThemeServiceOverride from "@codingame/monaco-vscode-theme-service-override";
 import getTextMateServiceOverride from "@codingame/monaco-vscode-textmate-service-override";
