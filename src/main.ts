@@ -1,6 +1,8 @@
 // main.ts
 import './style.css'
 import * as monaco from 'monaco-editor';
+import '@codingame/monaco-vscode-python-default-extension';
+import "@codingame/monaco-vscode-theme-defaults-default-extension";
 
 // importing installed services
 import { initialize } from '@codingame/monaco-vscode-api'
@@ -11,7 +13,8 @@ import getTextMateServiceOverride from "@codingame/monaco-vscode-textmate-servic
 // adding worker
 export type WorkerLoader = () => Worker;
 const workerLoaders: Partial<Record<string, WorkerLoader>> = {
-	TextEditorWorker: () => new Worker(new URL('monaco-editor/esm/vs/editor/editor.worker.js', import.meta.url), { type: 'module' })
+	TextEditorWorker: () => new Worker(new URL('monaco-editor/esm/vs/editor/editor.worker.js', import.meta.url), { type: 'module' }),
+	TextMateWorker: () => new Worker(new URL('@codingame/monaco-vscode-textmate-service-override/worker', import.meta.url), { type: 'module' })
 }
 window.MonacoEnvironment = {
   getWorker: function (_workerId, label) {
