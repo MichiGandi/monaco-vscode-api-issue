@@ -15,14 +15,19 @@
   },
   "dependencies": {
     "@codingame/esbuild-import-meta-url-plugin": "^1.0.3",
-    "@codingame/monaco-vscode-api": "^18.2.0",
-    "@codingame/monaco-vscode-languages-service-override": "^18.2.0",
-    "@codingame/monaco-vscode-python-default-extension": "^18.2.0",
-    "@codingame/monaco-vscode-textmate-service-override": "^18.2.0",
-    "@codingame/monaco-vscode-theme-defaults-default-extension": "^18.2.0",
-    "@codingame/monaco-vscode-theme-service-override": "^18.2.0",
-    "monaco-editor": "npm:@codingame/monaco-vscode-editor-api@^18.2.0",
+    "@codingame/monaco-vscode-api": "18.1.0",
+    "@codingame/monaco-vscode-languages-service-override": "18.1.0",
+    "@codingame/monaco-vscode-python-default-extension": "18.1.0",
+    "@codingame/monaco-vscode-textmate-service-override": "18.1.0",
+    "@codingame/monaco-vscode-theme-defaults-default-extension": "18.1.0",
+    "@codingame/monaco-vscode-theme-service-override": "18.1.0",
+    "monaco-editor": "npm:@codingame/monaco-vscode-editor-api@^18.1.0",
     "monaco-languageclient": "^9.8.0",
     "vscode-ws-jsonrpc": "^3.4.0"
+  },
+  "overrides": {
+    "monaco-languageclient": {
+      "@codingame/monaco-vscode-api": "18.1.0"
+    }
   }
 }

@@ -39,7 +39,7 @@ await initialize({
 	...getLanguagesServiceOverride(),
 });
 
-await new Promise(resolve => setTimeout(resolve, 5000));
+//await new Promise(resolve => setTimeout(resolve, 5000));
 
 monaco.editor.create(document.getElementById('editor')!, {
 	value: "print('Hello world!')",
