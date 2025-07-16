@@ -4,7 +4,8 @@ import importMetaUrlPlugin from '@codingame/esbuild-import-meta-url-plugin'
 export default {
   optimizeDeps: {
     include: [
-      'vscode-textmate'
+      'vscode-textmate',
+      'vscode-oniguruma'
     ],
       esbuildOptions: {
         plugins: [importMetaUrlPlugin]
