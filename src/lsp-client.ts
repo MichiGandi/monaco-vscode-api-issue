@@ -34,9 +34,6 @@ const createLanguageClient = (messageTransports: MessageTransports): MonacoLangu
                 closed: () => ({ action: CloseAction.DoNotRestart })
             }
         },
-        // create a language client connection from the JSON RPC connection on demand
-        connectionProvider: {
-            get: async (_encoding: string) => messageTransports
-        }
+        messageTransports: messageTransports
     });
 };
