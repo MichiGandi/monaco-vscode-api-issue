@@ -15,6 +15,7 @@ const server = http.createServer();
 const wss = new WebSocket.Server({ server });
 
 wss.on('connection', (ws) => {
+  console.log("connection")
   const socket = toSocket(ws);
 
   // Create WebSocket side of the transport
@@ -30,10 +31,12 @@ wss.on('connection', (ws) => {
 
   // Pipe LSP <-> WebSocket
   socketReader.listen((message) => {
+    console.log("socketReader: " + message)
     lsWriter.write(message);
   });
 
   lsReader.listen((message) => {
+    console.log("socketWriter: " + message)
     socketWriter.write(message);
   });
 
