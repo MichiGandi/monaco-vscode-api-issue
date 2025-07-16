@@ -1,50 +1,49 @@
 // lsp-server.js
+const http = require('http');
+const WebSocket = require('ws');
 const { spawn } = require('child_process');
-const { createServer } = require('http');
-const { WebSocketServer } = require('ws');
-const rpc = require('vscode-ws-jsonrpc');
-const lsp = require('vscode-ws-jsonrpc/lib/server');
+const {
+  createWebSocketConnection,
+  WebSocketMessageReader,
+  WebSocketMessageWriter,
+} = require('vscode-ws-jsonrpc');
 
-const server = createServer();
-const wss = new WebSocketServer({ server });
+const { createMessageConnection, StreamMessageReader, StreamMessageWriter } = require('vscode-jsonrpc');
+
+// Start Python Language Server (pylsp)
+const pylsp = spawn('pylsp'); // make sure pylsp is in PATH
+
+pylsp.stderr.on('data', (data) => {
+  console.error('pylsp stderr:', data.toString());
+});
+pylsp.on('exit', (code) => {
+  console.log('pylsp exited with code', code);
+});
+
+// Start HTTP server
+const server = http.createServer();
+const wss = new WebSocket.Server({ server });
 
 wss.on('connection', (ws) => {
   console.log('🔌 WebSocket client connected');
 
-  const socket = {
-    send: content => ws.send(content),
-    onMessage: cb => ws.on('message', cb),
-    onError: cb => ws.on('error', cb),
-    onClose: cb => ws.on('close', cb),
-    dispose: () => ws.close(),
-  };
+  const reader = new WebSocketMessageReader(ws);
+  const writer = new WebSocketMessageWriter(ws);
 
-  const reader = new rpc.WebSocketMessageReader(socket);
-  const writer = new rpc.WebSocketMessageWriter(socket);
+  const socketConnection = createWebSocketConnection(reader, writer);
 
-  const connection = rpc.createMessageConnection(reader, writer);
+  const serverReader = new StreamMessageReader(pylsp.stdout);
+  const serverWriter = new StreamMessageWriter(pylsp.stdin);
 
-  // Spawn the pylsp process
-  const serverProcess = spawn('pylsp');
+  const serverConnection = createMessageConnection(serverReader, serverWriter);
 
-  const serverReader = new lsp.StreamMessageReader(serverProcess.stdout);
-  const serverWriter = new lsp.StreamMessageWriter(serverProcess.stdin);
+  // Forward between client ↔ server
+  socketConnection.forward(serverConnection);
+  serverConnection.listen();
 
-  const serverConnection = rpc.createMessageConnection(serverReader, serverWriter);
-
-  // Forward messages between client and server
-  connection.forward(serverConnection);
-  connection.listen();
-
-  serverProcess.stderr.on('data', (data) => {
-    console.error(`pylsp stderr: ${data}`);
-  });
-
-  serverProcess.on('exit', (code, signal) => {
-    console.log(`pylsp exited with code ${code}, signal ${signal}`);
-  });
+  console.log('🔁 Connection bridged between client and pylsp');
 });
 
 server.listen(5007, () => {
-  console.log('🚀 LSP WebSocket server running on ws://localhost:5007');
+  console.log('🚀 LSP WebSocket proxy listening on ws://localhost:5007');
 });
