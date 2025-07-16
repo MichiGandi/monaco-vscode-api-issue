@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "vscode-ws-jsonrpc": "^3.4.0",
+    "ws": "^8.18.3"
+  }
+}
