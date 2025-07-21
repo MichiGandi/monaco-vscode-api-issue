@@ -22,14 +22,14 @@ const workerLoaders: Partial<Record<string, WorkerLoader>> = {
 }
 
 window.MonacoEnvironment = {
-  getWorker: function (_moduleId, label) {
-	console.log('getWorker', _moduleId, label);
-	const workerFactory = workerLoaders[label]
-    if (workerFactory != null) {
-      return workerFactory()
-    }
-	throw new Error(`Worker ${label} not found`)
-  }
+	getWorker: function (_moduleId, label) {
+		console.log('getWorker', _moduleId, label);
+		const workerFactory = workerLoaders[label]
+		if (workerFactory != null) {
+			return workerFactory()
+		}
+		throw new Error(`Worker ${label} not found`)
+	}
 }
 
 // adding services

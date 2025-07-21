@@ -7,8 +7,18 @@ export default {
       'vscode-textmate',
       'vscode-oniguruma'
     ],
-      esbuildOptions: {
-        plugins: [importMetaUrlPlugin]
+    esbuildOptions: {
+      plugins: [importMetaUrlPlugin]
+    }
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        format: 'es'
       }
     }
+  },
+  worker: {
+    format: 'es'
+  }
 } satisfies UserConfig
