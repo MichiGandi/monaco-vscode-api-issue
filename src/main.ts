@@ -39,11 +39,19 @@ await initialize({
 	...getLanguagesServiceOverride(),
 });
 
-//await new Promise(resolve => setTimeout(resolve, 5000));
-
 monaco.editor.create(document.getElementById('editor')!, {
 	value: "print('Hello world!')",
-	language: "python"
+	language: "python",
+	theme: "transparentTheme",
+	minimap: {
+		enabled: false
+	},
+	stickyScroll: {
+		enabled: false
+	},
+	lineNumbersMinChars: 2,  // Shrinks the line number gutter
+	lineDecorationsWidth: 0, // Removes extra margin space
+	folding: true           // Removes fold markers to reduce visual clutter
 });
 
 // start web socket lsp client on port 5007 
