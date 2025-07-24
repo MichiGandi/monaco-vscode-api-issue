@@ -13,6 +13,7 @@ import { initWebSocketAndStartClient } from './lsp-client'
 import getLanguagesServiceOverride from "@codingame/monaco-vscode-languages-service-override";
 import getThemeServiceOverride from "@codingame/monaco-vscode-theme-service-override";
 import getTextMateServiceOverride from "@codingame/monaco-vscode-textmate-service-override";
+import { whenReady } from "@codingame/monaco-vscode-python-default-extension";
 
 // adding worker
 export type WorkerLoader = () => Worker;
@@ -42,7 +43,6 @@ await initialize({
 monaco.editor.create(document.getElementById('editor')!, {
 	value: "print('Hello world!')",
 	language: "python",
-	theme: "transparentTheme",
 	minimap: {
 		enabled: false
 	},
@@ -57,3 +57,6 @@ monaco.editor.create(document.getElementById('editor')!, {
 // start web socket lsp client on port 5007 
 // (you can choose any port, just make sure the server uses the same)
 initWebSocketAndStartClient("ws://localhost:5007")
+
+await whenReady();
+monaco.editor.setTheme("Default Dark+");
