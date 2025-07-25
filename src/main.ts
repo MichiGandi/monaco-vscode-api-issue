@@ -5,6 +5,7 @@ import "@codingame/monaco-vscode-theme-defaults-default-extension";
 import './style.css'
 import * as monaco from 'monaco-editor';
 import { initialize } from '@codingame/monaco-vscode-api'
+import { ExtensionHostKind, registerExtension } from '@codingame/monaco-vscode-api/extensions'
 
 // we need to import this so monaco-languageclient can use vscode-api
 import { initWebSocketAndStartClient } from './lsp-client'
@@ -58,5 +59,25 @@ monaco.editor.create(document.getElementById('editor')!, {
 // (you can choose any port, just make sure the server uses the same)
 initWebSocketAndStartClient("ws://localhost:5007")
 
-await whenReady();
-monaco.editor.setTheme("Default Dark+");
+const registerExtensionResult = registerExtension({
+	name: 'custom-theme-extension',
+	publisher: 'none',
+	version: '1.0.0',
+	engines: {
+		vscode: '*'
+	},
+	contributes: {
+		themes: [
+			{
+				id: "Custom Theme",
+				label: "Custom Theme",
+				uiTheme: "vs-dark",
+				path: "./themes/custom-theme.json",
+			}
+		]
+	}
+}, ExtensionHostKind.LocalProcess)
+
+registerExtensionResult.registerFileUrl('./themes/custom-theme.json', new URL('/custom-theme.json', import.meta.url).toString())
+await registerExtensionResult.whenReady();
+monaco.editor.setTheme("Custom Theme");
