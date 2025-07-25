@@ -1,7 +1,7 @@
 {
   "$schema": "vscode://schemas/color-theme",
-  "name": "Cobalt",
-  "type": "dark",
+  "name": "Custom Theme",
+  "type": "custom",
   "semanticHighlighting": true,
   "semanticTokenColors": {
     "function": {
@@ -60,7 +60,7 @@
     "dropdown.foreground": "#fff",
     // editor
     // This is the main background color
-    "editor.background": "#193549",
+    "editor.background": "#00000000",
     // this is the main text colour
     "editor.foreground": "#fff",
     // Okay this part is confusing as heck!
@@ -75,8 +75,8 @@
     // when you have something selected, but have lost focus on the editor
     "editor.inactiveSelectionBackground": "#003b8b",
     // current line styles
-    "editor.lineHighlightBackground": "#1F4662",
-    "editor.lineHighlightBorder": "#234E6D",
+    "editor.lineHighlightBackground": "#083d44ee",
+    "editor.lineHighlightBorder": "#083d44",
     "editor.rangeHighlightBackground": "#1F4662",
     // selected Text colours
     // This is the standard Select colour
@@ -100,7 +100,7 @@
     // Hints (little dots under the beginning of a word)
     "editorHint.foreground": "#ffc600",
     // gutter
-    "editorGutter.background": "#12273866",
+    "editorGutter.background": "#164951",
     "editorGutter.addedBackground": "#3C9F4A",
     "editorGutter.deletedBackground": "#A22929",
     "editorGutter.modifiedBackground": "#26506D",
