@@ -14,7 +14,6 @@ import { initWebSocketAndStartClient } from './lsp-client'
 import getLanguagesServiceOverride from "@codingame/monaco-vscode-languages-service-override";
 import getThemeServiceOverride from "@codingame/monaco-vscode-theme-service-override";
 import getTextMateServiceOverride from "@codingame/monaco-vscode-textmate-service-override";
-import { whenReady } from "@codingame/monaco-vscode-python-default-extension";
 
 // adding worker
 export type WorkerLoader = () => Worker;
