@@ -15,6 +15,8 @@ import getLanguagesServiceOverride from "@codingame/monaco-vscode-languages-serv
 import getThemeServiceOverride from "@codingame/monaco-vscode-theme-service-override";
 import getTextMateServiceOverride from "@codingame/monaco-vscode-textmate-service-override";
 
+import './unity-interop';
+
 // adding worker
 export type WorkerLoader = () => Worker;
 const workerLoaders: Partial<Record<string, WorkerLoader>> = {
@@ -40,7 +42,7 @@ await initialize({
 	...getLanguagesServiceOverride(),
 });
 
-monaco.editor.create(document.getElementById('editor')!, {
+window.editor = monaco.editor.create(document.getElementById('editor')!, {
 	value: "print('Hello world!')",
 	language: "python",
 	minimap: {
