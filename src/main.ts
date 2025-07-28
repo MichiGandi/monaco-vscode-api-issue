@@ -43,7 +43,7 @@ await initialize({
 });
 
 window.editor = monaco.editor.create(document.getElementById('editor')!, {
-	value: "print('Hello world!')",
+	value: "",
 	language: "python",
 	minimap: {
 		enabled: false
