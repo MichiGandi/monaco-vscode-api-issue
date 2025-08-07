@@ -58,7 +58,7 @@ window.editor = monaco.editor.create(document.getElementById('editor')!, {
 
 // start web socket lsp client on port 5007 
 // (you can choose any port, just make sure the server uses the same)
-initWebSocketAndStartClient("ws://localhost:5007")
+//initWebSocketAndStartClient("ws://localhost:5007")
 
 const registerExtensionResult = registerExtension({
 	name: 'custom-theme-extension',
@@ -82,3 +82,24 @@ const registerExtensionResult = registerExtension({
 registerExtensionResult.registerFileUrl('./themes/custom-theme.json', new URL('/custom-theme.json', import.meta.url).toString())
 await registerExtensionResult.whenReady();
 monaco.editor.setTheme("Custom Theme");
+
+monaco.languages.registerCompletionItemProvider('python', {
+  provideCompletionItems(model, position) {
+    return {
+      suggestions: [
+        {
+          label: 'my_custom_function',
+          kind: monaco.languages.CompletionItemKind.Function,
+          insertText: 'my_custom_function()',
+          detail: 'Custom client-side function'
+        },
+        {
+          label: 'print',
+          kind: monaco.languages.CompletionItemKind.Function,
+          insertText: 'print()',
+          detail: 'Custom client-side function'
+        }
+      ]
+    };
+  }
+});
